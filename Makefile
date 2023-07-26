@@ -6,13 +6,13 @@ NAME = so_long
 # MLXFLAGS =  -L /usr/local/lib/ -lmlx -lXext -lX11
 MINILIBX = -I /usr/X11/include -g -L /usr/X11/lib -lmlx -lXext -lX11
 
-SRCS = main.c error.c
+SRCS = main.c error.c validate_map.c
 OBJS = $(SRCS:.c=.o)
 INCLUDE_DIR = -I $(MLX_PATH)
 
 # Compile source files into into object files
 %.o: %.c so_long.h
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -fPIE -c $< -o $@
 
 all: $(NAME)
 
