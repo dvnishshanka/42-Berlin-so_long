@@ -2,6 +2,6 @@
 
 void	print_error(char *msg)
 {
-	printf("%s\n", msg);
+	ft_printf("Error\n%s\n", msg);
 	exit (1);
 }

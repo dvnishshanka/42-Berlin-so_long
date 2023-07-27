@@ -1,10 +1,89 @@
 #include "so_long.h"
 
-void	validate_map(char *map_name)
+// Map description file has to end with the ".ber" extension
+static void	check_file_ext(char *map_name)
+{
+	char	*index_ptr;
+
+	index_ptr = ft_strrchr(map_name, '.');
+	if (!index_ptr)
+		print_error("Incorrect map file extension");
+	if (ft_strncmp(index_ptr, ".ber", 5) != 0)
+		print_error("Incorrect map file extension");
+}
+
+static	void	init_map(t_map *map)
+{
+	map->coins = 0;
+	map->exit_nos = 0;
+	map->players = 0;
+	map->no_of_rows = 0;
+	map->no_of_cols = 0;
+	map->error_flag = 0;
+}
+
+static void	map_error(t_map *map)
+{
+	if (map->error_flag == ERR_COL_SIZE)
+		print_error("Map row size different");
+	if (map->error_flag == INVALID_WALL)
+		print_error("Map wall is incomplete");
+	if (map->error_flag == INVALID_CHAR)
+		print_error("Map consists of undefined characters");
+	if (map->no_of_cols == map->no_of_rows)
+		print_error("Map is not rectangular");
+	if (map->no_of_cols < 3 || map->no_of_rows < 3 || ((map->no_of_cols + map->no_of_rows) <= 7 ))
+		print_error("Incorrect map");
+}
+
+int	find_row_size(char	*str)
+{
+	int	str_len;
+
+	str_len = 0;
+	while (*str && *str != '\n' && *str != '\r')
+	{
+		str_len ++;
+		str ++;
+	}
+	return (str_len);
+}
+
+static void	read_map(int map_fd, t_map *map)
+{
+	char	*line;
+	int		line_length;
+
+	init_map(map);
+	while (1)
+	{
+		line = get_next_line(map_fd);
+		if (!line)
+			break;
+		line_length = find_row_size(line);
+		if ((line_length == 0 || (map->no_of_cols != 0 && line_length != map->no_of_cols))
+			&& map->error_flag == 0)
+			map->error_flag = ERR_COL_SIZE;
+		if (map->no_of_cols == 0 && map->error_flag == 0)
+			map->no_of_cols = line_length;
+		map->no_of_rows++;
+		if (!map->error_flag)
+			check_map_data(line, map, map->no_of_rows);
+		free(line);
+	}
+
+	map_error(map);
+}
+
+void	validate_map(char *map_name, t_map *map)
 {
 	int	map_fd;
 
+	check_file_ext(map_name);
 	map_fd = open(map_name, O_RDONLY);
 	if (map_fd < 0)
-		print_error("FAIL TO OPEN THE FILE");
+		print_error("Fail to open the file");
+	read_map(map_fd, map);
+	close(map_fd);
 }
+

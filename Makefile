@@ -1,14 +1,23 @@
 CC = cc
-MLX_PATH = ./minilibx-linux
 CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
 NAME = so_long
-# MLXFLAGS =  -L /usr/local/lib/ -lmlx -lXext -lX11
-MINILIBX = -I /usr/X11/include -g -L /usr/X11/lib -lmlx -lXext -lX11
+RM = rm -f
+INCLUDE = -I include
 
-SRCS = main.c error.c validate_map.c
+LIBFT = libft.a
+LIBFT_DIR = libft
+FT_PRINTF = libftprintf.a
+FT_PRINTF_DIR = ft_printf
+GET_NEXT_LINE_DIR = get_next_line
+
+# MLX_PATH = ./minilibx-linux
+
+# MLXFLAGS =  -L /usr/local/lib/ -lmlx -lXext -lX11
+# MINILIBX = -I /usr/X11/include -g -L /usr/X11/lib -lmlx -lXext -lX11
+# INCLUDE_DIR = -I $(MLX_PATH)
+
+SRCS = main.c error.c validate_map.c $(GET_NEXT_LINE_DIR)/get_next_line.c $(GET_NEXT_LINE_DIR)/get_next_line_utils.c validate_map_utils.c
 OBJS = $(SRCS:.c=.o)
-INCLUDE_DIR = -I $(MLX_PATH)
 
 # Compile source files into into object files
 %.o: %.c so_long.h
@@ -17,12 +26,18 @@ INCLUDE_DIR = -I $(MLX_PATH)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	make -C $(FT_PRINTF_DIR)
+	make -C $(LIBFT_DIR)
+	$(CC) $(OBJS) $(INCLUDE) $(LIBFT_DIR)/$(LIBFT) $(FT_PRINTF_DIR)/$(FT_PRINTF) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
+	make clean -C $(FT_PRINTF_DIR)
+	make clean -C $(LIBFT_DIR)
 	$(RM) $(OBJS)
 
 fclean: clean
+	make fclean -C $(FT_PRINTF_DIR)
+	make fclean -C $(LIBFT_DIR)
 	$(RM) $(NAME)
 
 re: fclean all
