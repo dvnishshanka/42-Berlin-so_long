@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:22:16 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/27 20:39:44 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/28 12:13:54 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*get_line(char *left_str)
 	}
 	if (left_str[i] == '\n')
 	{
-		line[i] = left_str[i];
+		line[i] = '\n';
 		i ++;
 	}
 	line[i] = '\0';

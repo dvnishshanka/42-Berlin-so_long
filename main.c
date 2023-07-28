@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/28 11:38:14 by dnishsha          #+#    #+#             */
+/*   Updated: 2023/07/28 12:04:39 by dnishsha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 // int main(void)
@@ -28,29 +40,15 @@
 //     return 0;
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
 int	main(int argc, char **argv)
 {
-    t_map   map;
+    t_map	map;
 
-    // map = {0};
 	if (argc != 2 || (!argv[1]))
 		print_error("Incorrect no of arguements");
 	validate_map(argv[1], &map);
 	return (0);
 }
-
 
 // int	main(void)
 // {
