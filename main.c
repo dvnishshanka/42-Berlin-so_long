@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:14 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/28 20:53:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/28 22:01:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	main(int argc, char **argv)
 		print_error("Incorrect no of arguements");
 	validate_map(argv[1], &map_info);
 	save_map(&game, map_info, argv[1]);
-	print(game, map_info);
-    // chk_solution(game);
+	// print(game, map_info);
+    chk_solution(game, map_info);
 	free_map(&game, map_info.no_of_rows);
 	return (0);
 }

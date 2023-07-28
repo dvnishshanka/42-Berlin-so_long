@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:24 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/28 20:38:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/28 21:58:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,9 @@ int		find_row_size(char	*str);
 
 // save_map.c
 void	save_map(char ***game, t_map map, char *map_name);
+
+// map_solution.c Check whether the map has a feasible solution
+void	chk_solution(char **game, t_map map_info);
+
+void print(char **game, t_map map_info);
 #endif
