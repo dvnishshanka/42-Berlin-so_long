@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:14 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/28 12:04:39 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:53:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,32 @@
 //     return 0;
 // }
 
+void print(char **game, t_map map_info)
+{
+	int i;
+
+	i = 0;
+	
+	while (i < map_info.no_of_rows)
+	{
+		ft_printf("%s\n", game[i]);
+		i ++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
-    t_map	map;
+    t_map	map_info;
+	char	**game;
 
+	game = NULL;
 	if (argc != 2 || (!argv[1]))
 		print_error("Incorrect no of arguements");
-	validate_map(argv[1], &map);
+	validate_map(argv[1], &map_info);
+	save_map(&game, map_info, argv[1]);
+	print(game, map_info);
+    // chk_solution(game);
+	free_map(&game, map_info.no_of_rows);
 	return (0);
 }
 

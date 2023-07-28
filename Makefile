@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/28 18:13:22 by marvin            #+#    #+#              #
+#    Updated: 2023/07/28 19:35:25 by marvin           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
@@ -16,7 +28,8 @@ GET_NEXT_LINE_DIR = get_next_line
 # MINILIBX = -I /usr/X11/include -g -L /usr/X11/lib -lmlx -lXext -lX11
 # INCLUDE_DIR = -I $(MLX_PATH)
 
-SRCS = main.c error.c validate_map.c $(GET_NEXT_LINE_DIR)/get_next_line.c $(GET_NEXT_LINE_DIR)/get_next_line_utils.c validate_map_utils.c
+SRCS = main.c error.c validate_map.c $(GET_NEXT_LINE_DIR)/get_next_line.c $(GET_NEXT_LINE_DIR)/get_next_line_utils.c validate_map_utils.c \
+	save_map.c map_solution.c
 OBJS = $(SRCS:.c=.o)
 
 # Compile source files into into object files

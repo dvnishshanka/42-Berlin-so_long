@@ -25,7 +25,7 @@ static void	check_file_ext(char *map_name)
 }
 
 // Initialize the map
-void	init_map(t_map *map)
+static void	init_map(t_map *map)
 {
 	map->coins = 0;
 	map->exit_nos = 0;
@@ -60,12 +60,13 @@ static void	read_map(int map_fd, t_map *map)
 	bool	is_wall;
 
 	init_map(map);
+	is_wall = false;
 	while (1)
 	{
-		is_wall = false;
 		line = get_next_line(map_fd);
 		if (!line)
 			break ;
+		is_wall = false;
 		line_length = find_row_size(line);
 		if ((line_length == 0 || (map->row_size != 0 && line_length != map->row_size))
 			&& map->error_flag == 0)
@@ -77,6 +78,7 @@ static void	read_map(int map_fd, t_map *map)
 			is_wall = check_map_data(line, map, map->no_of_rows);
 		free(line);
 	}
+	
 	if (!is_wall)
 		map->error_flag = INVALID_WALL;
 	map_error(map);
