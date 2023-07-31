@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 18:13:22 by marvin            #+#    #+#              #
-#    Updated: 2023/07/28 19:35:25 by marvin           ###   ########.fr        #
+#    Updated: 2023/07/30 20:11:48 by dnishsha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,8 @@ FT_PRINTF = libftprintf.a
 FT_PRINTF_DIR = ft_printf
 GET_NEXT_LINE_DIR = get_next_line
 
-# MLX_PATH = ./minilibx-linux
-
-# MLXFLAGS =  -L /usr/local/lib/ -lmlx -lXext -lX11
-# MINILIBX = -I /usr/X11/include -g -L /usr/X11/lib -lmlx -lXext -lX11
-# INCLUDE_DIR = -I $(MLX_PATH)
-
 SRCS = main.c error.c validate_map.c $(GET_NEXT_LINE_DIR)/get_next_line.c $(GET_NEXT_LINE_DIR)/get_next_line_utils.c validate_map_utils.c \
-	save_map.c map_solution.c
+	save_map.c map_solution.c render_window.c render_map.c movements.c
 OBJS = $(SRCS:.c=.o)
 
 # Compile source files into into object files

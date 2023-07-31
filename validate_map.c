@@ -33,6 +33,9 @@ static void	init_map(t_map *map)
 	map->no_of_rows = 0;
 	map->row_size = 0;
 	map->error_flag = 0;
+	map->moves = 0;
+	map->player_pos[0] = 0;
+	map->player_pos[1] = 0;
 }
 
 static void	map_error(t_map *map)
@@ -78,7 +81,6 @@ static void	read_map(int map_fd, t_map *map)
 			is_wall = check_map_data(line, map, map->no_of_rows);
 		free(line);
 	}
-	
 	if (!is_wall)
 		map->error_flag = INVALID_WALL;
 	map_error(map);

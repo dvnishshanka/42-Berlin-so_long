@@ -3,34 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   map_solution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 19:03:24 by marvin            #+#    #+#             */
-/*   Updated: 2023/07/28 19:03:24 by marvin           ###   ########.fr       */
+/*   Created: 2023/07/29 12:52:27 by dnishsha          #+#    #+#             */
+/*   Updated: 2023/07/29 12:52:27 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Mark the accessible points with 'X'.
 static bool	mark_access(int	row, int col, char ***game_copy, t_map map_info)
 {
-	if ((row - 1) > 0 && (*game_copy)[row - 1][col] == '0')
+	if ((row - 1) > 0 && ((*game_copy)[row - 1][col] == '0' || (*game_copy)[row - 1][col] == 'C'))
 		(*game_copy)[row - 1][col] = 'X';
-	if ((row + 1) < (map_info.no_of_rows - 1) && (*game_copy)[row - 1][col] == '0')
+	if ((row + 1) < (map_info.no_of_rows - 1)
+		&& ((*game_copy)[row - 1][col] == '0' || (*game_copy)[row - 1][col] == 'C'))
 		(*game_copy)[row + 1][col] = 'X';
-	if ((col - 1) > 0 && (*game_copy)[row][col - 1] == '0')
+	if ((col - 1) > 0 && ((*game_copy)[row][col - 1] == '0' || (*game_copy)[row][col - 1] == 'C'))
 		(*game_copy)[row][col - 1] = 'X';
-	if ((col + 1) < (map_info.row_size - 1) && (*game_copy)[row][col + 1] == '0')
+	if ((col + 1) < (map_info.row_size - 1)
+		&& ((*game_copy)[row][col + 1] == '0' || (*game_copy)[row][col + 1] == 'C' ))
 		(*game_copy)[row][col + 1] = 'X';
 	(*game_copy)[row][col] = 'x';
 	return (false);
 }
 
+// Checks whether a certain position is reachable to the player
 static bool	is_reachable(int row, int col, char **game_copy, t_map map_info)
 {
 	if ((row - 1) > 0 && (game_copy)[row - 1][col] == 'x')
 		return (true);
-	if ((row + 1) < (map_info.no_of_rows - 1) && (game_copy)[row + 1][col] == 'x')
+	if ((row + 1) < (map_info.no_of_rows - 1)
+		&& (game_copy)[row + 1][col] == 'x')
 		return (true);
 	if ((col - 1) > 0 && (game_copy)[row][col - 1] == 'x')
 		return (true);
@@ -39,7 +44,7 @@ static bool	is_reachable(int row, int col, char **game_copy, t_map map_info)
 	return (false);
 }
 
-static	void	chk_reachability(char ***game_copy, t_map map_info)
+static	void	chk_reachability(char ***game_copy, t_map map_info, char **game)
 {
 	int		i;
 	int		j;
@@ -50,16 +55,17 @@ static	void	chk_reachability(char ***game_copy, t_map map_info)
 		j = 1;
 		while (j < (map_info.row_size - 1))
 		{
-			if (((*game_copy)[i][j] == 'C' || (*game_copy)[i][j] == 'E') && (!is_reachable(i, j, *game_copy, map_info)))
+			if (((*game_copy)[i][j] == 'C' || (*game_copy)[i][j] == 'E')
+				&& (!is_reachable(i, j, *game_copy, map_info)))
 			{
+				print(*game_copy, map_info);
 				free_map(game_copy, map_info.no_of_rows);
-				print_error("Map cannot be solved");
+				free_n_err(&game, map_info.no_of_rows, "Map cannot be solved");
 			}
 			j++;
 		}
 		i++;
 	}
-	
 }
 
 static void	map_access(char ***game_copy, t_map map_info)
@@ -85,9 +91,7 @@ static void	map_access(char ***game_copy, t_map map_info)
 			i++;
 		}
 	}
-	print(*game_copy, map_info);
 }
-
 
 void	chk_solution(char **game, t_map map_info)
 {
@@ -97,7 +101,7 @@ void	chk_solution(char **game, t_map map_info)
 	i = 0;
 	game_copy = (char **)malloc(sizeof(char *) * (map_info.no_of_rows));
 	if (!game_copy)
-		print_error("Memory allocation failed");
+		free_n_err(&game, map_info.row_size, "Memory allocation failed");
 	while (i < map_info.no_of_rows)
 	{
 		game_copy[i] = (char *)malloc(sizeof(char) * (map_info.row_size + 1));
@@ -105,12 +109,11 @@ void	chk_solution(char **game, t_map map_info)
 		if (!game_copy[i])
 		{
 			free_map(&game_copy, i);
-			print_error("Memory allocation failed");
+			free_n_err(&game, map_info.no_of_rows, "Memory allocation failed");
 		}
 		i ++;
 	}
 	map_access(&game_copy, map_info);
-	chk_reachability(&game_copy, map_info);
-	// print(game_copy, map_info);
+	chk_reachability(&game_copy, map_info, game);
 	free_map(&game_copy, map_info.no_of_rows);
 }

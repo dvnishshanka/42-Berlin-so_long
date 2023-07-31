@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:24 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/28 21:58:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/31 10:53:35 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,24 @@
 # define INVALID_CHAR 2
 # define INVALID_WALL 3
 
+# define KEY_PRESS 2
+# define CLICK_CLOSE 17
+
+// Keycodes
+#define	ESC_KEY 65307
+#define	UP_KEY 119
+#define	DOWN_KEY 97
+#define	RIGHT_KEY 100
+#define	LEFT_KEY 115
+#define	UP_KEY_2 65362
+#define	DOWN_KEY_2 65364
+#define	RIGHT_KEY_2 65363
+#define	LEFT_KEY_2 65361
+
+// Colors
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+
 typedef struct s_map
 {
 	int	coins;
@@ -41,11 +59,26 @@ typedef struct s_map
 	int	no_of_rows;
 	int	row_size;
 	int	error_flag;
+	int player_pos[2];
+	int moves;
 }	t_map;
+
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+}	t_vars;
+
+typedef struct s_hook_params
+{
+    t_vars	*vars;
+    char	***game;
+    t_map	*map_info;
+} t_hook_params;
 
 // error.c
 void	print_error(char *msg);
 void	free_map(char ***map, int i);
+void	free_n_err(char ***map, int i, char *msg);
 
 // validate_map.c and validate_map_utils.c
 void	validate_map(char *map_name, t_map *map);
@@ -57,6 +90,16 @@ void	save_map(char ***game, t_map map, char *map_name);
 
 // map_solution.c Check whether the map has a feasible solution
 void	chk_solution(char **game, t_map map_info);
+
+void	render_window(char	***game, t_map map_info);
+void	render_map(char **game, t_vars vars, t_map map_info);
+
+void	go_up(t_hook_params *keypress_params);
+void	go_down(t_hook_params *keypress_params);
+void	go_left(t_hook_params *keypress_params);
+void	go_right(t_hook_params *keypress_params);
+
+int	close_game(t_hook_params *keypress_params);
 
 void print(char **game, t_map map_info);
 #endif

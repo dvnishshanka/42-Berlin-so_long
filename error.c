@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 11:38:04 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/28 20:43:21 by marvin           ###   ########.fr       */
+/*   Created: 2023/07/29 12:53:20 by dnishsha          #+#    #+#             */
+/*   Updated: 2023/07/30 14:48:32 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_error(char *msg)
 {
-	ft_printf("Error\n%s\n", msg);
+	ft_printf(RED "Error\n%s\n", msg);
 	exit (1);
 }
 
@@ -30,4 +30,10 @@ void	free_map(char ***map, int i)
 	}
 	free(*map);
 	*map = NULL;
+}
+
+void	free_n_err(char ***map, int i, char *msg)
+{
+	free_map(map, i);
+	print_error(msg);
 }

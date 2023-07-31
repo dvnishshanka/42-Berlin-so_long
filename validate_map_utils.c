@@ -44,22 +44,28 @@ static bool	chk_is_wall(char	*row)
 bool	check_map_data(char	*row, t_map *map, int row_no)
 {
 	bool	is_wall;
+	int		i;
 
+	i = 0;
 	is_wall = chk_is_wall(row);
-	if (row[0] != '1')
+	if (row[i] != '1')
 		map->error_flag = INVALID_WALL;
-	while (*row && !is_line_end(*row) && (!map->error_flag))
+	while (row[i] && !is_line_end(row[i]) && (!map->error_flag))
 	{
 		chk_invalid_char(row, map);
-		if (*row != '1' && (is_line_end(*(row + 1)) || row_no == 1))
+		if (row[i] != '1' && (is_line_end(row[i + 1])|| row_no == 1))
 			map->error_flag = INVALID_WALL;
-		if (*row == 'P')
+		if (row[i] == 'P')
+		{
+			map->player_pos[0] = row_no - 1;
+			map->player_pos[1] = i;
 			map->players ++;
-		if (*row == 'E')
+		}
+		if (row[i] == 'E')
 			map->exit_nos ++;
-		if (*row == 'C')
+		if (row[i] == 'C')
 			map->coins ++;
-		row ++;
+		i ++;
 	}
 	return (is_wall);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 19:34:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/07/28 19:34:40 by marvin           ###   ########.fr       */
+/*   Created: 2023/07/29 12:53:00 by dnishsha          #+#    #+#             */
+/*   Updated: 2023/07/29 12:53:00 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static	void	read_map_data(int map_fd, char ***game, t_map map)
 	}
 }
 
-
+// Save map to the variable 'game'
 void	save_map(char ***game, t_map map, char *map_name)
 {
 	int	map_fd;
