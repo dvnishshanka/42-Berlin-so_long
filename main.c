@@ -6,7 +6,7 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 12:53:12 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/31 15:33:56 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:45:56 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,3 @@ int	main(int argc, char **argv)
 	free_map(&game, map_info.no_of_rows);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-

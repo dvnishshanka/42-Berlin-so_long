@@ -6,7 +6,7 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:24 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/31 10:53:35 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/07/31 21:41:02 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 // Colors
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
+#define PURPLE	"\e[0;35m"
 
 typedef struct s_map
 {
@@ -63,9 +64,15 @@ typedef struct s_map
 	int moves;
 }	t_map;
 
+
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
+	void	*wall;
+	void	*bird;
+	void	*cherry;
+	void	*cage;
+	void	*grass;
 }	t_vars;
 
 typedef struct s_hook_params
@@ -93,13 +100,14 @@ void	chk_solution(char **game, t_map map_info);
 
 void	render_window(char	***game, t_map map_info);
 void	render_map(char **game, t_vars vars, t_map map_info);
+void	init_images(t_vars *vars, int img_width, int img_height);
 
 void	go_up(t_hook_params *keypress_params);
 void	go_down(t_hook_params *keypress_params);
 void	go_left(t_hook_params *keypress_params);
 void	go_right(t_hook_params *keypress_params);
 
-int	close_game(t_hook_params *keypress_params);
+int	close_game(t_hook_params *keypress_params, char *msg);
 
 void print(char **game, t_map map_info);
 #endif

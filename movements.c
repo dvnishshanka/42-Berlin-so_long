@@ -26,13 +26,15 @@ void	go_up(t_hook_params *keypress_params)
 		(*(keypress_params->game))[x_pos - 1][y_pos] = 'P';
 		(*(keypress_params->game))[x_pos][y_pos] = '0';
 		(*(keypress_params->map_info)).player_pos[0] = x_pos - 1;
-		ft_printf(GREEN "Moves up %d\n", (*(keypress_params->map_info)).player_pos[0]);
 		(*(keypress_params->map_info)).moves ++;
+		ft_printf(PURPLE "Move %d\n", (*(keypress_params->map_info)).moves);
 		render_map(*(keypress_params->game), *(keypress_params->vars), *(keypress_params->map_info));
 	}
 	else if ((*(keypress_params->game))[x_pos - 1][y_pos] == 'E' && (*(keypress_params->map_info)).coins == 0)
-	{	close_game(keypress_params);
+	{
 		(*(keypress_params->map_info)).moves ++;
+		ft_printf(PURPLE "You won by %d moves 😊\n", (*(keypress_params->map_info)).moves);
+		close_game(keypress_params, "Congratulations!! 🎉");
 	}
 }
 
@@ -53,12 +55,14 @@ void	go_down(t_hook_params *keypress_params)
 		(*(keypress_params->game))[x_pos][y_pos] = '0';
 		(*(keypress_params->map_info)).player_pos[0] = x_pos + 1;
 		(*(keypress_params->map_info)).moves ++;
+		ft_printf(PURPLE "Move %d\n", (*(keypress_params->map_info)).moves);
 		render_map(*(keypress_params->game), *(keypress_params->vars), *(keypress_params->map_info));
 	}
 	else if ((*(keypress_params->game))[x_pos + 1][y_pos] == 'E' && (*(keypress_params->map_info)).coins == 0)
 	{
+		close_game(keypress_params, "Congratulations!! 🎉");
+		ft_printf(PURPLE "You won by %d moves 😊\n", (*(keypress_params->map_info)).moves);
 		(*(keypress_params->map_info)).moves ++;
-		close_game(keypress_params);
 	}
 }
 
@@ -76,14 +80,15 @@ void	go_left(t_hook_params *keypress_params)
 		(*(keypress_params->game))[x_pos][y_pos - 1] = 'P';
 		(*(keypress_params->game))[x_pos][y_pos] = '0';
 		(*(keypress_params->map_info)).player_pos[1] = y_pos - 1;
-		ft_printf(GREEN "Moves left %d\n", (*(keypress_params->map_info)).player_pos[1]);
 		(*(keypress_params->map_info)).moves ++;
+		ft_printf(PURPLE "Move %d\n", (*(keypress_params->map_info)).moves);
 		render_map(*(keypress_params->game), *(keypress_params->vars), *(keypress_params->map_info));
 	}
 	else if ((*(keypress_params->game))[x_pos][y_pos - 1] == 'E' && (*(keypress_params->map_info)).coins == 0)
 	{
 		(*(keypress_params->map_info)).moves ++;
-		close_game(keypress_params);
+		ft_printf(PURPLE "You won by %d moves 😊\n", (*(keypress_params->map_info)).moves);
+		close_game(keypress_params, "Congratulations!! 🎉");
 	}
 }
 
@@ -103,13 +108,14 @@ void	go_right(t_hook_params *keypress_params)
 		(*(keypress_params->game))[x_pos][y_pos + 1] = 'P';
 		(*(keypress_params->game))[x_pos][y_pos] = '0';
 		(*(keypress_params->map_info)).player_pos[1] = y_pos + 1;
-		ft_printf(GREEN "Moves right %d\n", (*(keypress_params->map_info)).player_pos[1]);
 		(*(keypress_params->map_info)).moves ++;
+		ft_printf(PURPLE "Move %d\n", (*(keypress_params->map_info)).moves);
 		render_map(*(keypress_params->game), *(keypress_params->vars), *(keypress_params->map_info));
 	}
 	else if ((*(keypress_params->game))[x_pos][y_pos + 1] == 'E' && (*(keypress_params->map_info)).coins == 0)
 	{
 		(*(keypress_params->map_info)).moves ++;
-		close_game(keypress_params);
+		ft_printf(PURPLE "You won by %d moves 😊\n", (*(keypress_params->map_info)).moves);
+		close_game(keypress_params, "Congratulations!! 🎉");
 	}
 }
