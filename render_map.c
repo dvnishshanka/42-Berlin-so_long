@@ -26,6 +26,25 @@ void	init_images(t_vars *vars, int img_width, int img_height)
 			"textures/grass.xpm", &img_width, &img_height);
 }
 
+static void	put_image(char **game, t_vars vars, t_map map_info, int i, int j)
+{
+	if (game[i][j] == '1')
+		mlx_put_image_to_window(vars.mlx, vars.win, vars.wall,
+			j * map_info.img_size, i * map_info.img_size);
+	else if (game[i][j] == 'P')
+		mlx_put_image_to_window(vars.mlx, vars.win, vars.bird,
+			j * map_info.img_size, i * map_info.img_size);
+	else if (game[i][j] == 'C')
+		mlx_put_image_to_window(vars.mlx, vars.win, vars.cherry,
+			j * map_info.img_size, i * map_info.img_size);
+	else if (game[i][j] == 'E')
+		mlx_put_image_to_window(vars.mlx, vars.win,
+			vars.cage, j * map_info.img_size, i * map_info.img_size);
+	else
+		mlx_put_image_to_window(vars.mlx, vars.win,
+			vars.grass, j * map_info.img_size, i * map_info.img_size);
+}
+
 void	render_map(char **game, t_vars vars, t_map map_info)
 {
 	int	i;
@@ -37,21 +56,7 @@ void	render_map(char **game, t_vars vars, t_map map_info)
 		j = 0;
 		while (game[i][j])
 		{
-			if (game[i][j] == '1')
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.wall,
-					j * map_info.img_size, i * map_info.img_size);
-			else if (game[i][j] == 'P')
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.bird,
-					j * map_info.img_size, i * map_info.img_size);
-			else if (game[i][j] == 'C')
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.cherry,
-					j * map_info.img_size, i * map_info.img_size);
-			else if (game[i][j] == 'E')
-				mlx_put_image_to_window(vars.mlx, vars.win,
-					vars.cage, j * map_info.img_size, i * map_info.img_size);
-			else
-				mlx_put_image_to_window(vars.mlx, vars.win,
-					vars.grass, j * map_info.img_size, i * map_info.img_size);
+			put_image(game, vars, map_info, i, j);
 			j++;
 		}
 		i ++;
