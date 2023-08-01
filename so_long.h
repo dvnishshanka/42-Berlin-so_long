@@ -6,7 +6,7 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:24 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/07/31 21:41:02 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/08/01 14:37:17 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include "mlx.h"
+
+// To get the screen size
+# include <X11/Xlib.h>
 
 // Libraries
 # include "ft_printf/ft_printf.h"
@@ -37,20 +40,20 @@
 # define CLICK_CLOSE 17
 
 // Keycodes
-#define	ESC_KEY 65307
-#define	UP_KEY 119
-#define	DOWN_KEY 97
-#define	RIGHT_KEY 100
-#define	LEFT_KEY 115
-#define	UP_KEY_2 65362
-#define	DOWN_KEY_2 65364
-#define	RIGHT_KEY_2 65363
-#define	LEFT_KEY_2 65361
+# define ESC_KEY 65307
+# define UP_KEY 119
+# define DOWN_KEY 97
+# define RIGHT_KEY 100
+# define LEFT_KEY 115
+# define UP_KEY_2 65362
+# define DOWN_KEY_2 65364
+# define RIGHT_KEY_2 65363
+# define LEFT_KEY_2 65361
 
 // Colors
-#define RED     "\x1b[31m"
-#define GREEN   "\x1b[32m"
-#define PURPLE	"\e[0;35m"
+# define RED     "\x1b[31m"
+# define GREEN   "\x1b[32m"
+# define PURPLE	"\e[0;35m"
 
 typedef struct s_map
 {
@@ -60,12 +63,12 @@ typedef struct s_map
 	int	no_of_rows;
 	int	row_size;
 	int	error_flag;
-	int player_pos[2];
-	int moves;
+	int	player_pos[2];
+	int	moves;
+	int	img_size;
 }	t_map;
 
-
-typedef struct	s_vars {
+typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	void	*wall;
@@ -77,10 +80,10 @@ typedef struct	s_vars {
 
 typedef struct s_hook_params
 {
-    t_vars	*vars;
-    char	***game;
-    t_map	*map_info;
-} t_hook_params;
+	t_vars	*vars;
+	char	***game;
+	t_map	*map_info;
+}	t_hook_params;
 
 // error.c
 void	print_error(char *msg);
@@ -107,7 +110,7 @@ void	go_down(t_hook_params *keypress_params);
 void	go_left(t_hook_params *keypress_params);
 void	go_right(t_hook_params *keypress_params);
 
-int	close_game(t_hook_params *keypress_params, char *msg);
+int		close_game(t_hook_params *keypress_params, char *msg);
 
-void print(char **game, t_map map_info);
+void	print(char **game, t_map map_info);
 #endif

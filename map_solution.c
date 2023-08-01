@@ -13,17 +13,22 @@
 #include "so_long.h"
 
 // Mark the accessible points with 'X'.
-static bool	mark_access(int	row, int col, char ***game_copy, t_map map_info)
+static bool	mark_access(int row, int col, char ***game_copy, t_map map_info)
 {
-	if ((row - 1) > 0 && ((*game_copy)[row - 1][col] == '0' || (*game_copy)[row - 1][col] == 'C'))
+	if ((row - 1) > 0 && ((*game_copy)[row - 1][col] == '0'
+		|| (*game_copy)[row - 1][col] == 'C'))
 		(*game_copy)[row - 1][col] = 'X';
 	if ((row + 1) < (map_info.no_of_rows - 1)
-		&& ((*game_copy)[row - 1][col] == '0' || (*game_copy)[row - 1][col] == 'C'))
+		&& ((*game_copy)[row - 1][col] == '0'
+		|| (*game_copy)[row - 1][col] == 'C'))
 		(*game_copy)[row + 1][col] = 'X';
-	if ((col - 1) > 0 && ((*game_copy)[row][col - 1] == '0' || (*game_copy)[row][col - 1] == 'C'))
+	if ((col - 1) > 0
+		&& ((*game_copy)[row][col - 1] == '0'
+		|| (*game_copy)[row][col - 1] == 'C'))
 		(*game_copy)[row][col - 1] = 'X';
 	if ((col + 1) < (map_info.row_size - 1)
-		&& ((*game_copy)[row][col + 1] == '0' || (*game_copy)[row][col + 1] == 'C' ))
+		&& ((*game_copy)[row][col + 1] == '0'
+		|| (*game_copy)[row][col + 1] == 'C' ))
 		(*game_copy)[row][col + 1] = 'X';
 	(*game_copy)[row][col] = 'x';
 	return (false);

@@ -36,6 +36,7 @@ static void	init_map(t_map *map)
 	map->moves = 0;
 	map->player_pos[0] = 0;
 	map->player_pos[1] = 0;
+	map->img_size = 100;
 }
 
 static void	map_error(t_map *map)
@@ -63,7 +64,6 @@ static void	read_map(int map_fd, t_map *map)
 	bool	is_wall;
 
 	init_map(map);
-	is_wall = false;
 	while (1)
 	{
 		line = get_next_line(map_fd);
@@ -71,8 +71,8 @@ static void	read_map(int map_fd, t_map *map)
 			break ;
 		is_wall = false;
 		line_length = find_row_size(line);
-		if ((line_length == 0 || (map->row_size != 0 && line_length != map->row_size))
-			&& map->error_flag == 0)
+		if ((line_length == 0 || (map->row_size != 0
+						&& line_length != map->row_size)) && map->error_flag == 0)
 			map->error_flag = ERR_COL_SIZE;
 		if (map->row_size == 0 && map->error_flag == 0)
 			map->row_size = line_length;

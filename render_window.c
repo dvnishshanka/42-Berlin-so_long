@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <X11/Xlib.h>
 
 int	close_game(t_hook_params *keypress_params, char *msg)
 {
 	free_map(keypress_params->game, (keypress_params->map_info)->no_of_rows);
-	ft_printf(GREEN "%s\n", msg);	
+	ft_printf(GREEN "%s\n", msg);
 	mlx_loop_end(keypress_params->vars->mlx);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->wall);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->bird);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->grass);
-	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->cherry);
+	mlx_destroy_image(keypress_params->vars->mlx,
+		keypress_params->vars->cherry);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->cage);
 	mlx_destroy_window(keypress_params->vars->mlx, keypress_params->vars->win);
 	exit(0);
@@ -42,41 +42,55 @@ static int	keypress_handler(int keycode, t_hook_params *keypress_params)
 	return (0);
 }
 
-int minimize_window_event(void *param)
+int	minimize_window_event(void *param)
 {
-    (void)param; 
-    return 0;
+	(void) param;
+	return (0);
+}
+
+static void	chk_screen_size(int img_size, t_map map_info, char	***game)
+{
+	Display	*display;
+	Screen	*screen;
+	int		screen_height;
+	int		screen_width;
+
+	display = XOpenDisplay(NULL);
+	screen = DefaultScreenOfDisplay(display);
+	screen_height = HeightOfScreen(screen);
+	screen_width = WidthOfScreen(screen);
+	XCloseDisplay(display);
+	if (img_size * map_info.no_of_rows > screen_height
+		|| img_size * map_info.row_size > screen_width)
+		free_n_err(game, map_info.no_of_rows,
+			"Map is too large for the screen");
 }
 
 void	render_window(char	***game, t_map map_info)
 {
 	t_vars			vars;
 	t_hook_params	keypress_params;
+	int				img_size;
 
-		Display* display = XOpenDisplay(NULL);
-    Screen* screen = DefaultScreenOfDisplay(display);
-    int screenWidth = WidthOfScreen(screen);
-    int screenHeight = HeightOfScreen(screen);
-	printf("screenWidth: %d %d", screenWidth, screenHeight);
-    XCloseDisplay(display);
-	
+	img_size = map_info.img_size;
+	chk_screen_size(img_size, map_info, game);
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
-		free_n_err(game, map_info.no_of_rows, "Error in establishing connection with Minilibx");
-	vars.win = mlx_new_window(vars.mlx, 800, 800, "So Long Game");
+		free_n_err(game, map_info.no_of_rows,
+			"Error in establishing connection with Minilibx");
+	vars.win = mlx_new_window(vars.mlx, img_size * map_info.row_size,
+		img_size * map_info.no_of_rows, "So Long Game");
 	if (!vars.win)
 	{
 		free(vars.mlx);
 		free_n_err(game, map_info.no_of_rows, "Error in establishing connection with Minilibx");
 	}
-	init_images(&vars, 100, 100);
+	init_images(&vars, img_size, img_size);
 	keypress_params.vars = &vars;
 	keypress_params.game = game;
-	keypress_params.map_info = &map_info;
-	mlx_hook(vars.win, KEY_PRESS, 1L<<0, keypress_handler, &keypress_params);
+	keypress_params.map_info = & map_info;
+	mlx_hook(vars.win, KEY_PRESS, 1L << 0, keypress_handler, &keypress_params);
 	// mlx_hook(vars.win, CLICK_CLOSE, 0, close_game, &keypress_params);
-	// mlx_hook(vars.win, 33, 0, minimize_window_event, NULL);
-
 	render_map(*game, vars, map_info);
 	mlx_loop(vars.mlx);
 }
