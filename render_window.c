@@ -16,9 +16,9 @@ int	close_game(t_hook_params *keypress_params, char *msg, bool victory)
 {
 	free_map(keypress_params->game, (keypress_params->map_info)->no_of_rows);
 	if (victory)
-	ft_printf(GREEN "%s\n", msg);
+		ft_printf(GREEN "%s\n", msg);
 	else
-	ft_printf(RED "%s\n", msg);
+		ft_printf(RED "%s\n", msg);
 	mlx_loop_end(keypress_params->vars->mlx);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->wall);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->birdr);
@@ -84,11 +84,12 @@ void	render_window(char	***game, t_map map_info)
 		free_n_err(game, map_info.no_of_rows,
 			"Error in establishing connection with Minilibx");
 	vars.win = mlx_new_window(vars.mlx, img_size * (map_info.row_size),
-		img_size * (map_info.no_of_rows + 1), "So Long Game");
+			img_size * (map_info.no_of_rows + 1), "So Long Game");
 	if (!vars.win)
 	{
 		free(vars.mlx);
-		free_n_err(game, map_info.no_of_rows, "Error in establishing connection with Minilibx");
+		free_n_err(game, map_info.no_of_rows,
+			"Error in establishing connection with Minilibx");
 	}
 	init_images(&vars, img_size, img_size);
 	keypress_params.vars = &vars;

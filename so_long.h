@@ -6,7 +6,7 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:24 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/08/02 15:45:57 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:34:35 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	go_down(t_hook_params *keypress_params);
 void	go_left(t_hook_params *keypress_params);
 void	go_right(t_hook_params *keypress_params);
 
-int	close_game(t_hook_params *keypress_params, char *msg, bool victory);
+int		close_game(t_hook_params *keypress_params, char *msg, bool victory);
 
 void	print(char **game, t_map map_info);
 #endif

@@ -53,7 +53,7 @@ bool	check_map_data(char	*row, t_map *map, int row_no)
 	while (row[i] && !is_line_end(row[i]) && (!map->error_flag))
 	{
 		chk_invalid_char(row, map);
-		if (row[i] != '1' && (is_line_end(row[i + 1])|| row_no == 1))
+		if (row[i] != '1' && (is_line_end(row[i + 1]) || row_no == 1))
 			map->error_flag = INVALID_WALL;
 		if (row[i] == 'P')
 		{
