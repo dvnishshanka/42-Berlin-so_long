@@ -12,17 +12,22 @@
 
 #include "so_long.h"
 
-int	close_game(t_hook_params *keypress_params, char *msg)
+int	close_game(t_hook_params *keypress_params, char *msg, bool victory)
 {
 	free_map(keypress_params->game, (keypress_params->map_info)->no_of_rows);
+	if (victory)
 	ft_printf(GREEN "%s\n", msg);
+	else
+	ft_printf(RED "%s\n", msg);
 	mlx_loop_end(keypress_params->vars->mlx);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->wall);
-	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->bird);
+	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->birdr);
+	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->birdl);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->grass);
 	mlx_destroy_image(keypress_params->vars->mlx,
 		keypress_params->vars->cherry);
 	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->cage);
+	mlx_destroy_image(keypress_params->vars->mlx, keypress_params->vars->wolf);
 	mlx_destroy_window(keypress_params->vars->mlx, keypress_params->vars->win);
 	exit(0);
 }
@@ -30,7 +35,7 @@ int	close_game(t_hook_params *keypress_params, char *msg)
 static int	keypress_handler(int keycode, t_hook_params *keypress_params)
 {
 	if (keycode == ESC_KEY)
-		close_game(keypress_params, "Game closed 👋");
+		close_game(keypress_params, "Game closed 👋", true);
 	else if (keycode == UP_KEY || keycode == UP_KEY_2)
 		go_up(keypress_params);
 	else if (keycode == DOWN_KEY || keycode == DOWN_KEY_2)

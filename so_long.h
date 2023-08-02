@@ -6,7 +6,7 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:24 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/08/01 15:37:58 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/08/02 15:45:57 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,12 @@ typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	void	*wall;
-	void	*bird;
+	void	*birdr;
+	void	*birdl;
 	void	*cherry;
 	void	*cage;
 	void	*grass;
+	void	*wolf;
 }	t_vars;
 
 typedef struct s_hook_params
@@ -110,7 +112,7 @@ void	go_down(t_hook_params *keypress_params);
 void	go_left(t_hook_params *keypress_params);
 void	go_right(t_hook_params *keypress_params);
 
-int		close_game(t_hook_params *keypress_params, char *msg);
+int	close_game(t_hook_params *keypress_params, char *msg, bool victory);
 
 void	print(char **game, t_map map_info);
 #endif

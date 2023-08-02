@@ -15,7 +15,7 @@
 static	void	chk_invalid_char(char *row, t_map *map)
 {
 	if (*row != '1' && *row != 'C' && *row != 'P'
-		&& *row != '0' && *row != 'E' && (!map->error_flag))
+		&& *row != '0' && *row != 'E' && *row != 'W' && (!map->error_flag))
 	{
 		map->error_flag = INVALID_CHAR;
 		return ;
