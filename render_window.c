@@ -83,8 +83,8 @@ void	render_window(char	***game, t_map map_info)
 	if (!vars.mlx)
 		free_n_err(game, map_info.no_of_rows,
 			"Error in establishing connection with Minilibx");
-	vars.win = mlx_new_window(vars.mlx, img_size * map_info.row_size,
-		img_size * map_info.no_of_rows, "So Long Game");
+	vars.win = mlx_new_window(vars.mlx, img_size * (map_info.row_size),
+		img_size * (map_info.no_of_rows + 1), "So Long Game");
 	if (!vars.win)
 	{
 		free(vars.mlx);

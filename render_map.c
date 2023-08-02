@@ -19,7 +19,7 @@ void	init_images(t_vars *vars, int img_width, int img_height)
 	vars->birdl = mlx_xpm_file_to_image(vars->mlx,
 			"textures/bird-l.xpm", &img_width, &img_height);
 	vars->birdr = mlx_xpm_file_to_image(vars->mlx,
-		"textures/bird-r.xpm", &img_width, &img_height);
+			"textures/bird-r.xpm", &img_width, &img_height);
 	vars->cherry = mlx_xpm_file_to_image(vars->mlx,
 			"textures/cherry-new.xpm", &img_width, &img_height);
 	vars->cage = mlx_xpm_file_to_image(vars->mlx,
@@ -30,45 +30,44 @@ void	init_images(t_vars *vars, int img_width, int img_height)
 			"textures/wolf.xpm", &img_width, &img_height);
 }
 
-static void	put_image(char **game, t_vars vars, t_map map_info, int i, int j)
+static void	put_image(char **game, t_vars vars, int img_size, int *p)
 {
-	if (game[i][j] == '1')
+	if (game[p[0]][p[1]] == '1')
 		mlx_put_image_to_window(vars.mlx, vars.win, vars.wall,
-			j * map_info.img_size, i * map_info.img_size);
-	else if (game[i][j] == 'P')
+			p[1] * img_size, p[0] * img_size);
+	else if (game[p[0]][p[1]] == 'P')
 		mlx_put_image_to_window(vars.mlx, vars.win, vars.birdl,
-			j * map_info.img_size, i * map_info.img_size);
-	else if (game[i][j] == 'p')
+			p[1] * img_size, p[0] * img_size);
+	else if (game[p[0]][p[1]] == 'p')
 		mlx_put_image_to_window(vars.mlx, vars.win, vars.birdr,
-			j * map_info.img_size, i * map_info.img_size);
-	else if (game[i][j] == 'C')
+			p[1] * img_size, p[0] * img_size);
+	else if (game[p[0]][p[1]] == 'C')
 		mlx_put_image_to_window(vars.mlx, vars.win, vars.cherry,
-			j * map_info.img_size, i * map_info.img_size);
-	else if (game[i][j] == 'E')
+			p[1] * img_size, p[0] * img_size);
+	else if (game[p[0]][p[1]] == 'E')
 		mlx_put_image_to_window(vars.mlx, vars.win,
-			vars.cage, j * map_info.img_size, i * map_info.img_size);
-	else if (game[i][j] == 'W')
+			vars.cage, p[1] * img_size, p[0] * img_size);
+	else if (game[p[0]][p[1]] == 'W')
 		mlx_put_image_to_window(vars.mlx, vars.win,
-			vars.wolf, j * map_info.img_size, i * map_info.img_size);
+			vars.wolf, p[1] * img_size, p[0] * img_size);
 	else
 		mlx_put_image_to_window(vars.mlx, vars.win,
-			vars.grass, j * map_info.img_size, i * map_info.img_size);
+			vars.grass, p[1] * img_size, p[0] * img_size);
 }
 
 void	render_map(char **game, t_vars vars, t_map map_info)
 {
-	int	i;
-	int	j;
+	int	p[2];
 
-	i = 0;
-	while (i < map_info.no_of_rows)
+	p[0] = 0;
+	while (p[0] < map_info.no_of_rows)
 	{
-		j = 0;
-		while (game[i][j])
+		p[1] = 0;
+		while (game[p[0]][p[1]])
 		{
-			put_image(game, vars, map_info, i, j);
-			j++;
+			put_image(game, vars, map_info.img_size, p);
+			p[1]++;
 		}
-		i ++;
+		p[0]++;
 	}
 }
