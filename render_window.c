@@ -95,7 +95,6 @@ void	render_window(char	***game, t_map map_info)
 	keypress_params.game = game;
 	keypress_params.map_info = & map_info;
 	mlx_hook(vars.win, KEY_PRESS, 1L << 0, keypress_handler, &keypress_params);
-	// mlx_hook(vars.win, CLICK_CLOSE, 0, close_game, &keypress_params);
 	render_map(*game, vars, map_info);
 	mlx_loop(vars.mlx);
 }
