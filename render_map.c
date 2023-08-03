@@ -21,7 +21,7 @@ void	init_images(t_vars *vars, int img_width, int img_height)
 	vars->birdr = mlx_xpm_file_to_image(vars->mlx,
 			"textures/bird-r.xpm", &img_width, &img_height);
 	vars->cherry = mlx_xpm_file_to_image(vars->mlx,
-			"textures/cherry-new.xpm", &img_width, &img_height);
+			"textures/cherry.xpm", &img_width, &img_height);
 	vars->cage = mlx_xpm_file_to_image(vars->mlx,
 			"textures/cage.xpm", &img_width, &img_height);
 	vars->grass = mlx_xpm_file_to_image(vars->mlx,
@@ -57,9 +57,10 @@ static void	put_image(char **game, t_vars vars, int img_size, int *p)
 
 void	render_map(char **game, t_vars vars, t_map map_info)
 {
-	int	p[2];
+	int		p[2];
 
 	p[0] = 0;
+	p[1] = 0;
 	while (p[0] < map_info.no_of_rows)
 	{
 		p[1] = 0;

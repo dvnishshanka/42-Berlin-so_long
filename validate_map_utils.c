@@ -12,10 +12,10 @@
 
 #include "so_long.h"
 
-static	void	chk_invalid_char(char *row, t_map *map)
+static	void	chk_invalid_char(char c, t_map *map)
 {
-	if (*row != '1' && *row != 'C' && *row != 'P'
-		&& *row != '0' && *row != 'E' && *row != 'W' && (!map->error_flag))
+	if (c != '1' && c != 'C' && c != 'P'
+		&& c != '0' && c != 'E' && c != 'W' && (!map->error_flag))
 	{
 		map->error_flag = INVALID_CHAR;
 		return ;
@@ -52,7 +52,8 @@ bool	check_map_data(char	*row, t_map *map, int row_no)
 		map->error_flag = INVALID_WALL;
 	while (row[i] && !is_line_end(row[i]) && (!map->error_flag))
 	{
-		chk_invalid_char(row, map);
+
+		chk_invalid_char(row[i], map);
 		if (row[i] != '1' && (is_line_end(row[i + 1]) || row_no == 1))
 			map->error_flag = INVALID_WALL;
 		if (row[i] == 'P')

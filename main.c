@@ -6,12 +6,14 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 12:53:12 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/08/01 14:33:43 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:15:07 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// For testing
+/*
 void	print(char **game, t_map map_info)
 {
 	int	i;
@@ -23,6 +25,7 @@ void	print(char **game, t_map map_info)
 		i ++;
 	}
 }
+*/
 
 int	main(int argc, char **argv)
 {

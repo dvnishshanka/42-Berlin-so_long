@@ -54,7 +54,7 @@ static void	map_error(t_map *map)
 		print_error("Incorrect map");
 	if (map->coins < 1 || map->exit_nos != 1
 		|| map->players != 1)
-		print_error("Incorrect map (Essential data is not included)");
+		print_error("Key data in map is missing or incorrect.");
 }
 
 static void	read_map(int map_fd, t_map *map)
@@ -82,7 +82,7 @@ static void	read_map(int map_fd, t_map *map)
 			is_wall = check_map_data(line, map, map->no_of_rows);
 		free(line);
 	}
-	if (!is_wall)
+	if (!is_wall && (!map->error_flag))
 		map->error_flag = INVALID_WALL;
 	map_error(map);
 }

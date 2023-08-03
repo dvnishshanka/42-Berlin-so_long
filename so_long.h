@@ -6,7 +6,7 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:24 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/08/02 19:34:35 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:14:41 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ void	go_right(t_hook_params *keypress_params);
 
 int		close_game(t_hook_params *keypress_params, char *msg, bool victory);
 
-void	print(char **game, t_map map_info);
+// For testing purpose
+// void	print(char **game, t_map map_info);
 #endif

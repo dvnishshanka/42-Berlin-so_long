@@ -63,7 +63,6 @@ static	void	chk_reachability(char ***game_copy, t_map map_info, char **game)
 			if (((*game_copy)[i][j] == 'C' || (*game_copy)[i][j] == 'E')
 				&& (!is_reachable(i, j, *game_copy, map_info)))
 			{
-				print(*game_copy, map_info);
 				free_map(game_copy, map_info.no_of_rows);
 				free_n_err(&game, map_info.no_of_rows, "Map cannot be solved");
 			}
