@@ -6,7 +6,7 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:38:24 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/08/03 21:14:41 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:41:27 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@
 # include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
-
-# include <stdio.h>
-# include <string.h>
 
 // Map error codes
 # define ERR_COL_SIZE 1
@@ -95,7 +92,7 @@ void	free_n_err(char ***map, int i, char *msg);
 // validate_map.c and validate_map_utils.c
 void	validate_map(char *map_name, t_map *map);
 bool	check_map_data(char	*row, t_map *map, int row_no);
-int		find_row_size(char	*str);
+void	set_row_size(char	*str, t_map *map);
 
 // save_map.c
 void	save_map(char ***game, t_map map, char *map_name);

@@ -47,9 +47,9 @@ static int	keypress_handler(int keycode, t_hook_params *keypress_params)
 	return (0);
 }
 
-int	minimize_window_event(void *param)
+int	close_window(t_hook_params *params)
 {
-	(void) param;
+	close_game(params, "Game closed 👋", true);
 	return (0);
 }
 
@@ -96,6 +96,7 @@ void	render_window(char	***game, t_map map_info)
 	keypress_params.game = game;
 	keypress_params.map_info = & map_info;
 	mlx_hook(vars.win, KEY_PRESS, 1L << 0, keypress_handler, &keypress_params);
+	mlx_hook(vars.win, CLICK_CLOSE, 0, close_window, &keypress_params);
 	render_map(*game, vars, map_info);
 	mlx_loop(vars.mlx);
 }

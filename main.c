@@ -6,7 +6,7 @@
 /*   By: dnishsha <dnishsha@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 12:53:12 by dnishsha          #+#    #+#             */
-/*   Updated: 2023/08/03 21:15:07 by dnishsha         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:21:46 by dnishsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(int argc, char **argv)
 	char	**game;
 
 	game = NULL;
-	if (argc != 2 || (!argv[1]))
-		print_error("Incorrect no of arguements");
+	if (argc != 2 || (!argv[1][0]))
+		print_error("Incorrect/Missing arguements");
 	validate_map(argv[1], &map_info);
 	save_map(&game, map_info, argv[1]);
 	chk_solution(game, map_info);

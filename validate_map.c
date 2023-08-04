@@ -60,7 +60,6 @@ static void	map_error(t_map *map)
 static void	read_map(int map_fd, t_map *map)
 {
 	char	*line;
-	int		line_length;
 	bool	is_wall;
 
 	init_map(map);
@@ -71,12 +70,7 @@ static void	read_map(int map_fd, t_map *map)
 		if (!line)
 			break ;
 		is_wall = false;
-		line_length = find_row_size(line);
-		if ((line_length == 0 || (map->row_size != 0
-						&& line_length != map->row_size)) && map->error_flag == 0)
-			map->error_flag = ERR_COL_SIZE;
-		if (map->row_size == 0 && map->error_flag == 0)
-			map->row_size = line_length;
+		set_row_size(line, map);
 		map->no_of_rows++;
 		if (!map->error_flag)
 			is_wall = check_map_data(line, map, map->no_of_rows);
