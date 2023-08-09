@@ -31,6 +31,21 @@ Basic 2D game in which a bird can go to the nest after eating all cherries.
 
 - Map should have a valid solution.
 
+**Usage**
+
+- Compile and create the executables
+  ```
+  make
+  ```
+- Start the game
+  ```
+  ./so_long <map file path>
+  ```
+  Example
+  ```
+  ./so_long maps/big_mapv.ber
+  ```
+
 **Resources**
 
 - https://harm-smits.github.io/42docs/libs/minilibx
