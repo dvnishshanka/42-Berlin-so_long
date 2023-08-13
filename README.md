@@ -13,6 +13,8 @@ Basic 2D game in which a bird can go to the nest after eating all cherries.
 - The bird is not able to move into walls.
 - At every move, the current number of movements is displayed in the shell.
 
+  https://github.com/dvnishshanka/42-Berlin-so_long/assets/108521900/c4ff969a-a3df-4e79-886b-a2ebe46b780d
+
 **Map**
 
 - The map can be composed of only these 6 characters:
